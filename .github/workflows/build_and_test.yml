@@ -20,6 +20,21 @@ jobs:
   test-action:
     runs-on: ubuntu-latest
     steps:
-      - name: Check branch name
+      - name: Clone repo
+        uses: actions/checkout@v4
+        with:
+          repository: nagarev/test-gh-actions
+          path: test-gh-actions
+          fetch-depth: 0
+
+      - name: Check branch for PR
+        if: github.event_name == 'pull_request'
+        working-directory: test-gh-actions
+        run: |
+          git switch naza ${{ github.head_ref }}
+
+      - name: Check branch for push
+        if: github.event_name != 'pull_request'
+        working-directory: test-gh-actions
         run: |
           git switch naza ${{ github.head_ref }}
