@@ -37,4 +37,4 @@ jobs:
         if: github.event_name != 'pull_request'
         working-directory: test-gh-actions
         run: |
-          git switch naza ${{ github.head_ref }}
+          git switch naza ${{ github.ref_name }}
