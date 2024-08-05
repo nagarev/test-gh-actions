@@ -37,7 +37,7 @@ jobs:
         if: github.event_name != 'pull_request'
         working-directory: test-gh-actions
         env:
-          BRANCH_NAME: ${{ github.name }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           BRANCH_EXIST=$(git ls-remote --refs https://github.com/nagarev/test-gh-actions "$BRANCH_NAME")
           if test -n "${BRANCH_EXIST}"; then
