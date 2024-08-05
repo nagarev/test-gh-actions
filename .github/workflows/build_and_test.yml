@@ -39,7 +39,7 @@ jobs:
         env:
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
-          BRANCH_EXIST = =$(git ls-remote --refs https://github.com/nagarev/test-gh-actions "$BRANCH_NAME")
+          BRANCH_EXIST = $(git ls-remote --refs https://github.com/nagarev/test-gh-actions "$BRANCH_NAME")
           if test -n "${BRANCH_EXIST}"; then
             echo "BRANCH FOUND"
           else
