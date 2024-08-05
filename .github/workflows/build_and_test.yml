@@ -44,4 +44,5 @@ jobs:
             echo "BRANCH FOUND"
           else
             echo "BRANCH NOT FOUND"
+          fi
           git switch naza "$BRANCH_NAME"
