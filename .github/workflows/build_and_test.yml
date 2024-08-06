@@ -43,7 +43,7 @@ jobs:
           BRANCH_EXISTS=$(git ls-remote --heads origin "$BRANCH_NAME")
           if test -n "${BRANCH_EXISTS}"; then
             echo "Found matching ref in RSKj"
-            CHECKOUT_REF="$BRANCH_EXISTS"
+            CHECKOUT_REF="$BRANCH_NAME"
           else
             echo "Using master for RSKj"
             CHECKOUT_REF="master"
