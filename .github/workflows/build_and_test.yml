@@ -37,13 +37,22 @@ jobs:
         if: github.event_name != 'pull_request'
         working-directory: test-gh-actions
         env:
-          BRANCH_NAME: ${{ github.ref }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           echo "$BRANCH_NAME"
-          BRANCH_EXISTS=$(git ls-remote --refs https://github.com/nagarev/test-gh-actions "$BRANCH_NAME")
+          BRANCH_EXISTS=$(git ls-remote --heads origin "$BRANCH_EXISTS")
           if test -n "${BRANCH_EXISTS}"; then
-            echo "BRANCH FOUND"
+            echo "Found matching ref in RSKj"
+            CHECKOUT_REF="$BRANCH_EXISTS"
           else
-            echo "BRANCH NOT FOUND"
+            echo "Using master for RSKj"
+            CHECKOUT_REF="master"
           fi
-          git switch naza "$BRANCH_NAME"
+          echo "CHECKOUT_REF=$CHECKOUT_REF" >> $GITHUB_ENV
+      
+      - name: Check out appropriate branch reference
+        working-directory: test-gh-actions
+        env:
+          CHECKOUT_REF: ${{ env.CHECKOUT_REF }}
+        run: |
+          git switch "$CHECKOUT_REF"
