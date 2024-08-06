@@ -40,7 +40,7 @@ jobs:
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
           echo "$BRANCH_NAME"
-          BRANCH_EXISTS=$(git ls-remote --heads origin "$BRANCH_EXISTS")
+          BRANCH_EXISTS=$(git ls-remote --heads origin "$BRANCH_NAME")
           if test -n "${BRANCH_EXISTS}"; then
             echo "Found matching ref in RSKj"
             CHECKOUT_REF="$BRANCH_EXISTS"
